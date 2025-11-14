@@ -52,8 +52,8 @@ export async function POST(request: Request) {
 
     // Send email notification to business owner
     await resend.emails.send({
-      from: 'LMK Tree Services <consultations@lmktreeservices.com.au>',
-      to: process.env.NOTIFICATION_EMAIL || 'info@lmktreeservices.com.au',
+      from: 'LMK Tree Services <kyle@lmktreeservices.com>',
+      to: process.env.NOTIFICATION_EMAIL || 'kyle@lmktreeservices.com',
       subject: `🌳 New Lead: ${serviceName} - ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -100,7 +100,7 @@ export async function POST(request: Request) {
 
     // Send confirmation email to client
     await resend.emails.send({
-      from: 'LMK Tree Services <noreply@lmktreeservices.com.au>',
+      from: 'LMK Tree Services <kyle@lmktreeservices.com>',
       to: email,
       subject: 'We\'ve Received Your Consultation Request - LMK Tree Services',
       html: `
@@ -144,7 +144,7 @@ export async function POST(request: Request) {
           
           <div style="text-align: center; padding: 20px; color: #666; font-size: 12px;">
             <p style="margin: 5px 0;">LMK Tree Services | Melbourne, Victoria</p>
-            <p style="margin: 5px 0;">Phone: 0412 345 678 | Email: info@lmktreeservices.com.au</p>
+            <p style="margin: 5px 0;">Phone: 0412 345 678 | Email: kyle@lmktreeservices.com</p>
             <p style="margin: 15px 0 5px 0; color: #999;">Fully Licensed & Insured | ABN: 12 345 678 901</p>
           </div>
         </div>
