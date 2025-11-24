@@ -1,4 +1,3 @@
-// components/Header.tsx
 'use client'
 
 import React, { useState, useEffect } from 'react'
@@ -11,9 +10,7 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
+    const handleScroll = () => setIsScrolled(window.scrollY > 50)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -23,12 +20,9 @@ export function Header() {
     { name: 'About', href: '#about' },
     { name: 'Gallery', href: '#gallery' },
     { name: 'Testimonials', href: '#testimonials' },
-    { name: 'FAQ', href: '#faq' },
   ]
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
   return (
     <>
@@ -36,21 +30,19 @@ export function Header() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-lg py-4'
-            : 'bg-transparent py-6'
+          isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Logo only */}
+            
+            {/* LOGO */}
             <div className="flex items-center">
               <Image
                 src="/logo.png"
                 alt="LMK Tree Services Logo"
-                width={1536}
-                height={1024}
-                className="h-12 w-auto object-contain"
+                width={154}   // target width
+                height={81}   // target height
                 priority
               />
             </div>
@@ -83,6 +75,7 @@ export function Header() {
                 <Phone className="w-4 h-4" />
                 <span>0429 187 791</span>
               </a>
+
               <button
                 onClick={scrollToTop}
                 className="px-6 py-2 bg-green-600 text-white font-semibold rounded-full hover:bg-green-700 transition-all hover:shadow-lg"
@@ -98,11 +91,7 @@ export function Header() {
                 isScrolled ? 'text-gray-700' : 'text-white'
               }`}
             >
-              {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
@@ -115,7 +104,6 @@ export function Header() {
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'tween' }}
             className="fixed inset-y-0 right-0 w-full max-w-sm bg-white z-40 shadow-2xl"
           >
             <div className="p-6 pt-24">
@@ -131,6 +119,7 @@ export function Header() {
                   </a>
                 ))}
               </nav>
+
               <div className="mt-8 space-y-4">
                 <a
                   href="tel:0429187791"
@@ -139,6 +128,7 @@ export function Header() {
                   <Phone className="w-5 h-5" />
                   0429 187 791
                 </a>
+
                 <button
                   onClick={() => {
                     scrollToTop()
@@ -154,7 +144,7 @@ export function Header() {
         )}
       </AnimatePresence>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
