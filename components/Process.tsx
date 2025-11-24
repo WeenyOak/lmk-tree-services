@@ -62,9 +62,11 @@ export function Process() {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <span className="inline-block px-4 py-2 bg-green-100 text-green-700 font-semibold text-xs tracking-wide rounded-full mb-4">
-            OUR PROCESS
-          </span>
+          <div className="mb-4 flex w-full justify-center">
+            <span className="inline-block px-4 py-2 bg-green-100 text-green-700 font-semibold text-xs tracking-wide rounded-full">
+              OUR PROCESS
+            </span>
+          </div>
           <h2 className="text-4xl md:text-5xl font-bold text-bark-900 mb-4 text-left">
             How We Handle Your Tree Work — Start to Finish
           </h2>
