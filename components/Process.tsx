@@ -83,15 +83,15 @@ export function Process() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
-              className="relative"
+              className="relative flex items-stretch gap-4"
             >
-              {/* Dot */}
-              <span className="absolute -left-[29px] top-2 flex h-5 w-5 items-center justify-center">
+              {/* Marker */}
+              <div className="flex items-center justify-center h-full w-8 -ml-[30px]">
                 <span className="h-3 w-3 rounded-full bg-green-600 ring-4 ring-green-100" />
-              </span>
+              </div>
 
               {/* Content */}
-              <div className="bg-bark-50 shadow-sm border border-bark-100 rounded-2xl p-6">
+              <div className="bg-bark-50 shadow-sm border border-bark-100 rounded-2xl p-6 flex-1">
                 <div className="flex items-start gap-4">
                   <div className="bg-green-100 rounded-xl p-3 flex-shrink-0">
                     <step.icon className="w-6 h-6 text-green-600" />
