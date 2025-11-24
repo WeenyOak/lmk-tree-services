@@ -21,7 +21,9 @@ export function Header() {
   const navItems = [
     { name: 'Services', href: '#services' },
     { name: 'About', href: '#about' },
+    { name: 'Gallery', href: '#gallery' },
     { name: 'Testimonials', href: '#testimonials' },
+    { name: 'FAQ', href: '#faq' },
   ]
 
   const scrollToTop = () => {
@@ -46,9 +48,9 @@ export function Header() {
               <Image
                 src="/logo.png"
                 alt="LMK Tree Services Logo"
-                width={48}
-                height={48}
-                className="h-12 w-12 object-contain"
+                width={1536}
+                height={1024}
+                className="h-12 w-auto object-contain"
                 priority
               />
             </div>
