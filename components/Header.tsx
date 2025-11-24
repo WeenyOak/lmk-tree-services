@@ -3,7 +3,8 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Phone, Menu, X, TreePine } from 'lucide-react'
+import { Phone, Menu, X } from 'lucide-react'
+import Image from 'next/image'
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -23,6 +24,10 @@ export function Header() {
     { name: 'Testimonials', href: '#testimonials' },
   ]
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <>
       <motion.header
@@ -36,35 +41,16 @@ export function Header() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Logo */}
-            <div className="flex items-center gap-3">
-              <div
-                className={`p-2 rounded-xl transition-all ${
-                  isScrolled ? 'bg-green-600' : 'bg-white/10 backdrop-blur-sm'
-                }`}
-              >
-                <TreePine
-                  className={`w-8 h-8 ${
-                    isScrolled ? 'text-white' : 'text-green-600'
-                  }`}
-                />
-              </div>
-              <div>
-                <h1
-                  className={`text-2xl font-bold transition-colors ${
-                    isScrolled ? 'text-gray-900' : 'text-white'
-                  }`}
-                >
-                  LMK Tree Services
-                </h1>
-                <p
-                  className={`text-xs transition-colors ${
-                    isScrolled ? 'text-gray-600' : 'text-white/90'
-                  }`}
-                >
-                  Professional Arborists
-                </p>
-              </div>
+            {/* Logo only */}
+            <div className="flex items-center">
+              <Image
+                src="/logo.png"
+                alt="LMK Tree Services Logo"
+                width={48}
+                height={48}
+                className="h-12 w-12 object-contain"
+                priority
+              />
             </div>
 
             {/* Desktop Navigation */}
@@ -96,11 +82,7 @@ export function Header() {
                 <span>0429 187 791</span>
               </a>
               <button
-                onClick={() =>
-                  document
-                    .getElementById('consultation')
-                    ?.scrollIntoView({ behavior: 'smooth' })
-                }
+                onClick={scrollToTop}
                 className="px-6 py-2 bg-green-600 text-white font-semibold rounded-full hover:bg-green-700 transition-all hover:shadow-lg"
               >
                 Get Free Quote
@@ -157,9 +139,7 @@ export function Header() {
                 </a>
                 <button
                   onClick={() => {
-                    document
-                      .getElementById('consultation')
-                      ?.scrollIntoView({ behavior: 'smooth' })
+                    scrollToTop()
                     setIsMobileMenuOpen(false)
                   }}
                   className="w-full px-4 py-3 bg-green-600 text-white rounded-full font-semibold"

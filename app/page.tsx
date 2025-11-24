@@ -5,7 +5,11 @@ import { Services } from '@/components/Services'
 import { Process } from '@/components/Process'
 import { About } from '@/components/About'
 import { Testimonials } from '@/components/Testimonials'
+<<<<<<< Updated upstream
 import { ConsultationForm } from '@/components/ConsultationForm'
+=======
+import { FAQ } from '@/components/FAQ'
+>>>>>>> Stashed changes
 import Footer from '@/components/Footer'
 
 export default function Home() {
@@ -17,7 +21,11 @@ export default function Home() {
       <Process />
       <About />
       <Testimonials />
+<<<<<<< Updated upstream
       <ConsultationForm />
+=======
+      <FAQ />
+>>>>>>> Stashed changes
       <Footer />
     </main>
   )
