@@ -1,3 +1,4 @@
+// components/Hero.tsx
 'use client'
 
 import React, { useState, useEffect } from 'react'
@@ -29,20 +30,20 @@ export function Header() {
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-4'
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white shadow-sm ${
+          isScrolled ? 'py-3' : 'py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            
+
             {/* LOGO */}
             <div className="flex items-center">
               <Image
                 src="/logo.png"
                 alt="LMK Tree Services Logo"
-                width={154}   // target width
-                height={81}   // target height
+                width={154}
+                height={81}
                 priority
               />
             </div>
@@ -53,9 +54,7 @@ export function Header() {
                 <a
                   key={item.name}
                   href={item.href}
-                  className={`font-medium transition-colors hover:text-green-600 ${
-                    isScrolled ? 'text-gray-700' : 'text-white'
-                  }`}
+                  className="font-medium text-gray-700 hover:text-green-600 transition-colors"
                 >
                   {item.name}
                 </a>
@@ -64,13 +63,10 @@ export function Header() {
 
             {/* CTA Buttons */}
             <div className="hidden md:flex items-center gap-4">
+
               <a
                 href="tel:0429187791"
-                className={`flex items-center gap-2 px-4 py-2 rounded-full font-semibold transition-all ${
-                  isScrolled
-                    ? 'bg-green-50 text-green-700 hover:bg-green-100'
-                    : 'bg-white/20 backdrop-blur-sm text-white hover:bg-white/30'
-                }`}
+                className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-700 rounded-full font-semibold hover:bg-green-100 transition-all"
               >
                 <Phone className="w-4 h-4" />
                 <span>0429 187 791</span>
@@ -87,12 +83,11 @@ export function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`lg:hidden p-2 rounded-lg transition-colors ${
-                isScrolled ? 'text-gray-700' : 'text-white'
-              }`}
+              className="lg:hidden p-2 rounded-lg text-gray-700"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
+
           </div>
         </div>
       </motion.header>
