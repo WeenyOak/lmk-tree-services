@@ -85,7 +85,8 @@ export function Services() {
         </motion.div>
 
         {/* Services Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Mobile now shows 2 columns as well */}
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
@@ -94,7 +95,7 @@ export function Services() {
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className="group relative h-72 cursor-pointer overflow-hidden rounded-2xl shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+              <div className="group relative h-72 cursor-pointer overflow-hidden rounded-2xl shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
                 {/* Background Image with zoom effect */}
                 <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
@@ -103,10 +104,12 @@ export function Services() {
                     backgroundColor: '#166534',
                   }}
                 />
-                
+
                 {/* Gradient Overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-t ${service.color} transition-opacity duration-500`} />
-                
+                <div
+                  className={`absolute inset-0 bg-gradient-to-t ${service.color} transition-opacity duration-500`}
+                />
+
                 {/* Content */}
                 <div className="absolute inset-0 flex flex-col justify-end p-6">
                   <motion.h3
@@ -116,14 +119,14 @@ export function Services() {
                   >
                     {service.title}
                   </motion.h3>
-                  
+
                   {/* Description - appears on hover */}
                   <div className="mt-2 overflow-hidden">
                     <p className="translate-y-4 text-sm text-white/0 transition-all duration-300 group-hover:translate-y-0 group-hover:text-white/90">
                       {service.description}
                     </p>
                   </div>
-                  
+
                   {/* Arrow indicator */}
                   <div className="mt-4 flex items-center gap-2 text-white/0 transition-all duration-300 group-hover:text-white/90">
                     <span className="text-sm font-medium">Learn more</span>

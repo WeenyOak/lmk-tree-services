@@ -2,142 +2,78 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
-import { Phone, Mail, MapPin, ArrowUp } from 'lucide-react'
+import { Phone, Mail, MapPin } from 'lucide-react'
 import Image from 'next/image'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-b from-primary-800 to-primary-900">
-      {/* Background decoration */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 h-64 w-64 rounded-full bg-green-500/10 blur-3xl" />
-      </div>
-
-      {/* Scroll to top button */}
-      <motion.button
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        onClick={scrollToTop}
-        className="absolute -top-6 right-8 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-lg transition-all hover:shadow-xl hover:-translate-y-1"
-      >
-        <ArrowUp className="h-5 w-5 text-primary-700" />
-      </motion.button>
-
-      <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        {/* Logo centered */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-10 flex justify-center"
-        >
-          <div className="text-center">
-            <Image
-              src="/logo.png"
-              alt="LMK Tree Services"
-              width={180}
-              height={90}
-              className="mx-auto object-contain brightness-0 invert"
-            />
-          </div>
-        </motion.div>
+    <footer className="bg-[#14532d] py-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Logo */}
+        <div className="mb-8 flex justify-center">
+          <Image
+            src="/logo.png"
+            alt="LMK Tree Services"
+            width={160}
+            height={80}
+            className="object-contain brightness-0 invert"
+          />
+        </div>
 
         {/* Contact info row */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mb-10 flex flex-wrap items-center justify-center gap-6 sm:gap-10"
-        >
+        <div className="mb-8 flex flex-wrap items-center justify-center gap-4 sm:gap-8">
           <a
             href="tel:0429187791"
-            className="group flex items-center gap-3 rounded-full bg-white/10 px-5 py-3 text-white backdrop-blur-sm transition-all hover:bg-white/20"
+            className="flex items-center gap-2 text-white transition-colors hover:text-emerald-300"
           >
-            <div className="rounded-full bg-emerald-500/20 p-2">
-              <Phone className="h-4 w-4 text-emerald-400" />
-            </div>
+            <Phone className="h-4 w-4 text-emerald-400" />
             <span className="font-medium">0429 187 791</span>
           </a>
 
           <a
             href="mailto:kyle@lmktreeservices.com"
-            className="group flex items-center gap-3 rounded-full bg-white/10 px-5 py-3 text-white backdrop-blur-sm transition-all hover:bg-white/20"
+            className="flex items-center gap-2 text-white transition-colors hover:text-emerald-300"
           >
-            <div className="rounded-full bg-emerald-500/20 p-2">
-              <Mail className="h-4 w-4 text-emerald-400" />
-            </div>
+            <Mail className="h-4 w-4 text-emerald-400" />
             <span className="font-medium">kyle@lmktreeservices.com</span>
           </a>
 
-          <div className="flex items-center gap-3 rounded-full bg-white/10 px-5 py-3 text-white backdrop-blur-sm">
-            <div className="rounded-full bg-emerald-500/20 p-2">
-              <MapPin className="h-4 w-4 text-emerald-400" />
-            </div>
+          <div className="flex items-center gap-2 text-white">
+            <MapPin className="h-4 w-4 text-emerald-400" />
             <span className="font-medium">Melbourne&apos;s South-East</span>
           </div>
-        </motion.div>
-
-        {/* Quick links */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm"
-        >
-          {['Services', 'About', 'Gallery', 'Testimonials', 'Contact'].map((link) => (
-            <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
-              className="text-primary-200 transition-colors hover:text-white"
-            >
-              {link}
-            </a>
-          ))}
-        </motion.div>
+        </div>
 
         {/* Divider */}
-        <div className="mb-8 h-px bg-gradient-to-r from-transparent via-primary-600 to-transparent" />
+        <div className="mb-6 h-px bg-white/20" />
 
-        {/* Bottom section */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-col items-center gap-4 text-center text-sm text-primary-300"
-        >
-          <p>&copy; {currentYear} LMK Tree Services. All Rights Reserved.</p>
-          
-          <div className="flex items-center gap-2">
-            <span className="text-primary-400">Designed by</span>
+        {/* Bottom row */}
+        <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+          <p className="text-sm text-white/70">
+            &copy; {currentYear} LMK Tree Services. All Rights Reserved.
+          </p>
+
+          {/* Designed by + Blank Slate Dev logo */}
+          <div className="flex flex-col items-center gap-2 sm:flex-row sm:items-center sm:gap-3">
+            <span className="text-sm text-white/70">Designed by</span>
             <a
-              href="http://blankslatedev.com/"
+              href="https://blankslatedev.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-opacity hover:opacity-80"
+              className="transition-all hover:scale-105"
             >
               <Image
                 src="/BlankSlateDevToFillHeader.png"
                 alt="Blank Slate Dev"
-                width={70}
-                height={70}
-                className="object-contain brightness-0 invert opacity-70"
+                width={96}
+                height={96}
+                className="object-contain drop-shadow-[0_0_12px_rgba(16,185,129,0.85)] hover:drop-shadow-[0_0_18px_rgba(16,185,129,1)] transition-all duration-300"
               />
             </a>
           </div>
-        </motion.div>
+        </div>
       </div>
     </footer>
   )

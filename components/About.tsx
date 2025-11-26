@@ -7,7 +7,10 @@ import { Shield, Award, TreePine, Sparkles } from 'lucide-react'
 
 export function About() {
   return (
-    <section id="about" className="relative z-20 -mt-32 pb-20">
+    // On mobile: normal spacing below hero (mt-10)
+    // On tablet: closer, but not overlapping (sm:mt-12)
+    // On desktop: overlapping hero for that lifted-card look (lg:-mt-32)
+    <section id="about" className="relative z-20 mt-10 sm:mt-12 lg:-mt-32 pb-20">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 60 }}
@@ -86,7 +89,7 @@ export function About() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
-                    className="rounded-2xl bg-white/10 p-4 backdrop-blur-sm border border-white/10"
+                    className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm"
                   >
                     <stat.icon className="mb-2 h-6 w-6 text-emerald-400" />
                     <p className="text-2xl font-bold text-white">{stat.value}</p>

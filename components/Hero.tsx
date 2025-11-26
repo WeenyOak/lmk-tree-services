@@ -52,6 +52,21 @@ export function Hero() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
+  // Enable parallax only on desktop (lg and up) so mobile doesn't fade the form
+  const [enableParallax, setEnableParallax] = useState(false);
+
+  useEffect(() => {
+    const updateParallax = () => {
+      if (typeof window === 'undefined') return;
+      // Tailwind's lg breakpoint is 1024px
+      setEnableParallax(window.innerWidth >= 1024);
+    };
+
+    updateParallax();
+    window.addEventListener('resize', updateParallax);
+    return () => window.removeEventListener('resize', updateParallax);
+  }, []);
+
   // Parallax scroll effect
   const { scrollY } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
@@ -145,7 +160,9 @@ export function Hero() {
           email: formData.email,
           phone: formData.phone,
           service: 'tree-removal',
-          message: formData.suburb ? `Suburb: ${formData.suburb}\n\n${formData.message}` : formData.message,
+          message: formData.suburb
+            ? `Suburb: ${formData.suburb}\n\n${formData.message}`
+            : formData.message,
           images: base64Images,
           imageNames: imageItems.map((item) => item.file.name),
         }),
@@ -153,7 +170,14 @@ export function Hero() {
 
       if (response.ok) {
         setSubmitStatus('success');
-        setFormData({ firstName: '', lastName: '', email: '', phone: '', suburb: '', message: '' });
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          suburb: '',
+          message: '',
+        });
         imageItems.forEach((item) => URL.revokeObjectURL(item.preview));
         setImageItems([]);
         setErrors({});
@@ -180,16 +204,14 @@ export function Hero() {
   };
 
   const scrollToNext = () => {
+    if (typeof window === 'undefined') return;
     window.scrollTo({ top: window.innerHeight - 100, behavior: 'smooth' });
   };
 
   return (
     <section className="relative min-h-screen overflow-hidden">
       {/* Parallax Background */}
-      <motion.div
-        className="absolute inset-0 scale-110"
-        style={{ y: backgroundY }}
-      >
+      <motion.div className="absolute inset-0 scale-110" style={{ y: backgroundY }}>
         <div
           className="absolute inset-0"
           style={{
@@ -204,17 +226,17 @@ export function Hero() {
       </motion.div>
 
       {/* Animated grain texture overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
         }}
       />
 
       {/* Content */}
-      <motion.div 
-        className="relative z-10 mx-auto max-w-7xl px-4 pt-32 pb-24 sm:px-6 lg:px-8"
-        style={{ y: contentY, opacity }}
+      <motion.div
+        className="relative z-10 mx-auto max-w-7xl px-4 pt-24 pb-24 sm:px-6 sm:pt-28 lg:px-8 lg:pt-32"
+        style={enableParallax ? { y: contentY, opacity } : undefined}
       >
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
           {/* Left: Copy with staggered animations */}
@@ -253,12 +275,16 @@ export function Hero() {
             >
               <p className="mb-2 text-lg text-white/80">
                 Call for a free quote on{' '}
-                <a href="tel:0429187791" className="font-bold text-white underline decoration-emerald-400 decoration-2 underline-offset-4 hover:decoration-emerald-300 transition-colors">
+                <a
+                  href="tel:0429187791"
+                  className="font-bold text-white underline decoration-emerald-400 decoration-2 underline-offset-4 transition-colors hover:decoration-emerald-300"
+                >
                   0429 187 791
                 </a>
               </p>
               <p className="mb-8 text-white/70">
-                Our tree cutting and lopping services are delivered by highly trained arborists at affordable prices.
+                Our tree cutting and lopping services are delivered by highly trained arborists at
+                affordable prices.
               </p>
             </motion.div>
 
@@ -299,7 +325,7 @@ export function Hero() {
             >
               <a
                 href="tel:0429187791"
-                className="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-emerald-500 to-green-600 px-8 py-4 font-bold text-white shadow-lg shadow-emerald-500/25 transition-all hover:shadow-xl hover:shadow-emerald-500/30 hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-emerald-500 to-green-600 px-8 py-4 font-bold text-white shadow-lg shadow-emerald-500/25 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-emerald-500/30"
               >
                 <Phone className="h-5 w-5 transition-transform group-hover:rotate-12" />
                 0429 187 791
@@ -316,7 +342,7 @@ export function Hero() {
             <div className="relative">
               {/* Glow effect behind card */}
               <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-emerald-500/20 via-green-500/10 to-emerald-500/20 blur-2xl" />
-              
+
               <div className="relative rounded-2xl border border-white/10 bg-white/95 p-6 shadow-2xl backdrop-blur-sm sm:p-8">
                 {/* Form Header */}
                 <div className="mb-6 text-center">
@@ -326,8 +352,8 @@ export function Hero() {
                     transition={{ duration: 0.5, delay: 0.5 }}
                     className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700"
                   >
-                    <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                    We Get Back To You In Minutes
+                    <span className="flex h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
+                    Same Day Quotes
                   </motion.div>
                 </div>
 
@@ -457,7 +483,9 @@ export function Hero() {
                           : 'border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20'
                       }`}
                     />
-                    {errors.message && <p className="mt-1 text-xs text-red-600">{errors.message}</p>}
+                    {errors.message && (
+                      <p className="mt-1 text-xs text-red-600">{errors.message}</p>
+                    )}
                   </div>
 
                   {/* Image Upload */}
@@ -473,7 +501,7 @@ export function Hero() {
                       <input {...getInputProps()} />
                       <Upload className="mx-auto mb-2 h-6 w-6 text-gray-400" />
                       <p className="text-sm text-gray-600">Upload Images</p>
-                      <p className="text-xs text-gray-400">Drag & drop or click (max 5)</p>
+                      <p className="text-xs text-gray-400">Drag &amp; drop or click (max 5)</p>
                     </div>
 
                     {errors.images && <p className="mt-2 text-sm text-red-600">{errors.images}</p>}
@@ -500,7 +528,7 @@ export function Hero() {
                                     e.stopPropagation();
                                     removeImage(item.id);
                                   }}
-                                  className="absolute -top-1.5 -right-1.5 z-20 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white shadow-md transition-all hover:bg-red-600 hover:scale-110"
+                                  className="absolute -top-1.5 -right-1.5 z-20 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white shadow-md transition-all hover:scale-110 hover:bg-red-600"
                                 >
                                   <X className="h-3 w-3" />
                                 </button>
@@ -558,19 +586,19 @@ export function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
+        className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-          className="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm transition-all hover:bg-white/20 hover:border-white/30"
+          className="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm transition-all hover:border-white/30 hover:bg-white/20"
         >
           <ChevronDown className="h-6 w-6 text-white" />
         </motion.div>
       </motion.button>
 
       {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#f7f5f2] to-transparent z-10" />
+      <div className="absolute bottom-0 left-0 right-0 z-10 h-32 bg-gradient-to-t from-[#f7f5f2] to-transparent" />
     </section>
   );
 }
