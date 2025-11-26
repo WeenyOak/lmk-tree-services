@@ -7,7 +7,11 @@ import { Shield, Award, TreePine, Sparkles, Brush } from 'lucide-react'
 
 export function About() {
   return (
-    <section id="about" className="relative z-20 mt-10 sm:mt-12 lg:-mt-32 pb-20">
+    <section
+      id="about"
+      className="relative z-20 mt-10 sm:mt-12 lg:-mt-42 xl:-mt-52 pb-20"
+
+    >
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 60 }}

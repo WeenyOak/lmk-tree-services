@@ -178,7 +178,8 @@ export function Hero() {
     window.scrollTo({ top: window.innerHeight - 100, behavior: 'smooth' });
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative min-h-[105vh] md:min-h-[103vh] lg:min-h-[100vh] overflow-hidden">
+
       {/* STATIC background with mobile + desktop images */}
       <div
         className="
@@ -191,7 +192,7 @@ export function Hero() {
 
       {/* MAIN CONTENT */}
       <motion.div
-        className="relative z-10 mx-auto max-w-7xl px-4 pt-24 pb-24 sm:px-6 sm:pt-28 lg:px-8 lg:pt-32"
+        className="relative z-10 mx-auto max-w-7xl px-4 pt-24 pb-20 sm:px-6 sm:pt-28 lg:px-8 lg:pt-32 lg:pb-16"
       >
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
           {/* LEFT TEXT */}
