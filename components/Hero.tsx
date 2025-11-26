@@ -1,8 +1,8 @@
 // components/Hero.tsx
 'use client';
 
-import React, { useState, useCallback, useEffect } from 'react';
-import { motion, useScroll, useTransform, Reorder } from 'framer-motion';
+import React, { useState, useCallback } from 'react';
+import { motion, Reorder } from 'framer-motion';
 import {
   CheckCircle,
   Phone,
@@ -53,24 +53,6 @@ export function Hero() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] =
     useState<'idle' | 'success' | 'error'>('idle');
-
-  const [enableParallax, setEnableParallax] = useState(false);
-
-  useEffect(() => {
-    const updateParallax = () => {
-      if (typeof window === 'undefined') return;
-      setEnableParallax(window.innerWidth >= 1024);
-    };
-
-    updateParallax();
-    window.addEventListener('resize', updateParallax);
-    return () => window.removeEventListener('resize', updateParallax);
-  }, []);
-
-  const { scrollY } = useScroll();
-  const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
-  const contentY = useTransform(scrollY, [0, 500], [0, 50]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0.3]);
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
@@ -197,23 +179,19 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen overflow-hidden">
-      {/* Background with mobile + desktop images (no overlays now) */}
-      <motion.div
+      {/* STATIC background with mobile + desktop images */}
+      <div
         className="
           absolute inset-0 
           bg-cover bg-center bg-no-repeat
-          transition-all duration-500
-
           bg-[url('/mobileherosectionbackground.jpg')]   /* Mobile */
           md:bg-[url('/HeroSectionBackgroundNo2.jpg')]   /* Desktop */
         "
-        style={enableParallax ? { y: backgroundY } : undefined}
       />
 
       {/* MAIN CONTENT */}
       <motion.div
         className="relative z-10 mx-auto max-w-7xl px-4 pt-24 pb-24 sm:px-6 sm:pt-28 lg:px-8 lg:pt-32"
-        style={enableParallax ? { y: contentY, opacity } : undefined}
       >
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
           {/* LEFT TEXT */}
@@ -236,7 +214,7 @@ export function Hero() {
             </p>
 
             <p className="mb-2 text-lg text-white/80">
-              Call now for a free quote:{' '}
+              Call now for a free quote{' '}
               <a
                 href="tel:0429187791"
                 className="font-bold text-white underline decoration-emerald-400 decoration-2 underline-offset-4"
@@ -402,7 +380,9 @@ export function Hero() {
                       <input {...getInputProps()} />
                       <Upload className="mx-auto mb-2 h-6 w-6 text-gray-400" />
                       <p className="text-sm text-gray-600">Upload Images</p>
-                      <p className="text-xs text-gray-400">Drag & drop or click (max 5)</p>
+                      <p className="text-xs text-gray-400">
+                        Drag & drop or click (max 5)
+                      </p>
                     </div>
 
                     {errors.images && (
