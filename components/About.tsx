@@ -3,13 +3,10 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Shield, Award, TreePine, Sparkles } from 'lucide-react'
+import { Shield, Award, TreePine, Sparkles, Brush } from 'lucide-react'
 
 export function About() {
   return (
-    // On mobile: normal spacing below hero (mt-10)
-    // On tablet: closer, but not overlapping (sm:mt-12)
-    // On desktop: overlapping hero for that lifted-card look (lg:-mt-32)
     <section id="about" className="relative z-20 mt-10 sm:mt-12 lg:-mt-32 pb-20">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -18,12 +15,12 @@ export function About() {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
-          {/* Main card - SOLID dark green background, no transparency */}
+          {/* Card */}
           <div className="relative overflow-hidden rounded-3xl bg-[#14532d] p-8 shadow-2xl sm:p-12">
-            {/* Decorative gradient overlay for depth */}
+            {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/50 via-transparent to-green-900/30" />
-            
-            {/* Decorative glow elements */}
+
+            {/* Glow accents */}
             <div className="absolute top-0 right-0 h-64 w-64 translate-x-1/3 -translate-y-1/3 rounded-full bg-emerald-400/20 blur-3xl" />
             <div className="absolute bottom-0 left-0 h-48 w-48 -translate-x-1/4 translate-y-1/4 rounded-full bg-green-400/20 blur-3xl" />
 
@@ -41,7 +38,7 @@ export function About() {
                 <div className="mb-8 h-1.5 w-24 rounded-full bg-gradient-to-r from-emerald-400 to-green-300" />
               </motion.div>
 
-              {/* Content */}
+              {/* Text */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -78,10 +75,10 @@ export function About() {
                 className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4"
               >
                 {[
-                  { icon: TreePine, value: '15+', label: 'Years Experience' },
-                  { icon: Shield, value: '$20M', label: 'Insurance Cover' },
-                  { icon: Award, value: '1000+', label: 'Trees Serviced' },
-                  { icon: Sparkles, value: '24/7', label: 'Emergency Service' },
+                  { icon: TreePine, value: '10+', label: 'Years Experience' },
+                  { icon: Shield, value: 'Licensed', label: 'Fully Certified' },
+                  { icon: Award, value: '5000+', label: 'Trees Serviced' },
+                  { icon: Brush, value: '100%', label: 'Clean Up' },
                 ].map((stat, index) => (
                   <motion.div
                     key={stat.label}
