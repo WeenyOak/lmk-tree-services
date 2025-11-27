@@ -16,6 +16,18 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isMobileMenuOpen])
+
   const navItems = [
     { name: 'Services', href: '#services' },
     { name: 'About', href: '#about' },
@@ -37,7 +49,6 @@ export function Header() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-
             {/* LOGO (CLICKABLE) */}
             <a
               href="https://lmktreeservices.com.au"
@@ -104,16 +115,21 @@ export function Header() {
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
-            className="fixed inset-y-0 right-0 w-full max-w-sm bg-white z-40 shadow-2xl"
+            transition={{ type: 'tween', duration: 0.3 }}
+            className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white z-40 shadow-2xl"
           >
-            <div className="p-6 pt-24">
-              <nav className="space-y-6">
+            {/* Menu header with logo space */}
+            <div className="h-[90px] border-b border-gray-100" />
+
+            {/* Menu content */}
+            <div className="p-6">
+              <nav className="space-y-4">
                 {navItems.map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block text-lg font-medium text-gray-700 hover:text-green-600"
+                    className="block text-lg font-medium text-gray-700 hover:text-green-600 py-2"
                   >
                     {item.name}
                   </a>

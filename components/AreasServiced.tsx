@@ -6,28 +6,46 @@ import { motion } from 'framer-motion'
 import { Check, MapPin } from 'lucide-react'
 
 const areas = [
-  'Glen Waverley',
-  'Mount Waverley',
-  'Chadstone',
-  'Camberwell',
-  'Ashwood',
-  'Burwood',
-  'Box Hill',
-  'Doncaster',
-  'Clayton',
-  'Oakleigh',
-  'Malvern',
-  'Hawthorn',
-  'Kew',
-  'Balwyn',
-  'Surrey Hills',
-  'Canterbury',
+  'Beaconsfield',
+  'Berwick',
+  'Bunyip',
+  'Churchill',
+  'Clyde',
+  'Clyde North',
+  'Cranbourne',
+  'Cranbourne East',
+  'Cranbourne West',
+  'Drouin',
+  'Endeavour Hills',
+  'Garfield',
+  'Glengarry',
+  'Glengarry West',
+  'Hallam',
+  'Hazelwood North',
+  'Koo Wee Rup',
+  'Lang Lang',
+  'Longwarry',
+  'Moe',
+  'Morwell',
+  'Narre Warren',
+  'Newborough',
+  'Officer',
+  'Pakenham',
+  'Trafalgar',
+  'Traralgon',
+  'Warragul',
+  'Yarragon',
 ]
 
 export function AreasServiced() {
-  const half = Math.ceil(areas.length / 2)
-  const leftColumn = areas.slice(0, half)
-  const rightColumn = areas.slice(half)
+  // Mobile: 2 columns (15 + 14)
+  const mobileCol1 = areas.slice(0, 15)
+  const mobileCol2 = areas.slice(15)
+
+  // Desktop: 3 columns (10 + 10 + 9)
+  const desktopCol1 = areas.slice(0, 10)
+  const desktopCol2 = areas.slice(10, 20)
+  const desktopCol3 = areas.slice(20)
 
   return (
     <section className="relative overflow-hidden bg-white py-24">
@@ -48,8 +66,11 @@ export function AreasServiced() {
             </div>
             <div>
               <h2 className="text-3xl font-bold text-primary-800 sm:text-4xl">
-                Areas serviced
+                Areas We Service
               </h2>
+              <p className="mt-2 text-gray-600">
+                Proudly servicing Gippsland & Melbourne&apos;s outer south-east
+              </p>
               <motion.div
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
@@ -60,29 +81,107 @@ export function AreasServiced() {
             </div>
           </div>
 
-          {/* Areas grid */}
-          <div className="grid grid-cols-1 gap-x-12 gap-y-0 sm:grid-cols-2">
-            {[leftColumn, rightColumn].map((column, colIndex) => (
-              <div key={colIndex} className="space-y-1">
-                {column.map((area, index) => (
-                  <motion.div
-                    key={area}
-                    initial={{ opacity: 0, x: colIndex === 0 ? -20 : 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.1 + index * 0.05 }}
-                    className="group flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-emerald-50"
-                  >
-                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 transition-colors group-hover:bg-emerald-200">
-                      <Check className="h-4 w-4 text-emerald-600" />
-                    </div>
-                    <span className="text-gray-700 transition-colors group-hover:text-gray-900">
-                      {area}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-            ))}
+          {/* Mobile: 2 columns (hidden on lg+) */}
+          <div className="grid grid-cols-2 gap-x-4 lg:hidden">
+            <div className="space-y-0">
+              {mobileCol1.map((area, index) => (
+                <motion.div
+                  key={area}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: 0.05 + index * 0.02 }}
+                  className="group flex items-center gap-2 rounded-lg px-2 py-2 transition-colors hover:bg-emerald-50"
+                >
+                  <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100 transition-colors group-hover:bg-emerald-200">
+                    <Check className="h-3 w-3 text-emerald-600" />
+                  </div>
+                  <span className="text-sm text-gray-700 transition-colors group-hover:text-gray-900">
+                    {area}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+            <div className="space-y-0">
+              {mobileCol2.map((area, index) => (
+                <motion.div
+                  key={area}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: 0.05 + index * 0.02 }}
+                  className="group flex items-center gap-2 rounded-lg px-2 py-2 transition-colors hover:bg-emerald-50"
+                >
+                  <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100 transition-colors group-hover:bg-emerald-200">
+                    <Check className="h-3 w-3 text-emerald-600" />
+                  </div>
+                  <span className="text-sm text-gray-700 transition-colors group-hover:text-gray-900">
+                    {area}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop: 3 columns (hidden below lg) */}
+          <div className="hidden lg:grid lg:grid-cols-3 lg:gap-x-8">
+            <div className="space-y-0">
+              {desktopCol1.map((area, index) => (
+                <motion.div
+                  key={area}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: 0.05 + index * 0.02 }}
+                  className="group flex items-center gap-2 rounded-lg px-2 py-2 transition-colors hover:bg-emerald-50"
+                >
+                  <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100 transition-colors group-hover:bg-emerald-200">
+                    <Check className="h-3 w-3 text-emerald-600" />
+                  </div>
+                  <span className="text-sm text-gray-700 transition-colors group-hover:text-gray-900">
+                    {area}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+            <div className="space-y-0">
+              {desktopCol2.map((area, index) => (
+                <motion.div
+                  key={area}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: 0.05 + index * 0.02 }}
+                  className="group flex items-center gap-2 rounded-lg px-2 py-2 transition-colors hover:bg-emerald-50"
+                >
+                  <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100 transition-colors group-hover:bg-emerald-200">
+                    <Check className="h-3 w-3 text-emerald-600" />
+                  </div>
+                  <span className="text-sm text-gray-700 transition-colors group-hover:text-gray-900">
+                    {area}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+            <div className="space-y-0">
+              {desktopCol3.map((area, index) => (
+                <motion.div
+                  key={area}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: 0.05 + index * 0.02 }}
+                  className="group flex items-center gap-2 rounded-lg px-2 py-2 transition-colors hover:bg-emerald-50"
+                >
+                  <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100 transition-colors group-hover:bg-emerald-200">
+                    <Check className="h-3 w-3 text-emerald-600" />
+                  </div>
+                  <span className="text-sm text-gray-700 transition-colors group-hover:text-gray-900">
+                    {area}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
           </div>
 
           {/* Note */}
@@ -97,7 +196,7 @@ export function AreasServiced() {
               Don&apos;t see your suburb?
             </p>
             <p className="text-gray-600">
-              We service all of Melbourne&apos;s south-east and surrounding areas. Submit a quote to confirm we can help.
+              We travel up to an hour from Drouin — from Narre Warren to Traralgon and everywhere in between. Get in touch to confirm we service your area.
             </p>
           </motion.div>
         </motion.div>
